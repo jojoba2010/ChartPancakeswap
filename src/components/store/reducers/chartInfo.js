@@ -10,7 +10,6 @@ const chartInfoSlice = createSlice({
     initialState,
     reducers: {
         addToChart(state, action) {
-            console.log(action)
             state.chartData = [...state.chartData, { ...action.payload.value }]
         }
     }

@@ -19,9 +19,13 @@ const ChartTracking = () => {
         return () => clearInterval(intervalId);
     }, [start])
 
-
+    const convertToStandardDateTime = (unix_timestamp) => {
+        if (unix_timestamp === 0)
+            return 0
+        return new Intl.DateTimeFormat('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(unix_timestamp)
+    }
     const data = {
-        labels: chartData.map(label => label.updated_at),
+        labels: chartData.map(label => convertToStandardDateTime(label.updated_at)),
         datasets: [
             {
                 label: 'YOLO',
@@ -54,10 +58,19 @@ const ChartTracking = () => {
 
         setStart(!start)
     }
+
     return <div>
         <label for='token'>Token : </label>
-        <input id='token' type='text' onChange={tokenChange} value={token} autoFocus />
-        <button onClick={startHandler} disabled={token.length < 20 && !start}>{start ? 'Stop' : 'Start'} </button>
+        <input
+            id='token'
+            type='text'
+            onChange={tokenChange}
+            value={token}
+            autoFocus
+            style={{ width: 340 }} />
+        <button
+            onClick={startHandler}
+            disabled={token.length < 20 && !start}>{start ? 'Stop' : 'Start'} </button>
         <Line data={data} />
     </div>
 }
