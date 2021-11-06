@@ -6,3 +6,6 @@ https://codesandbox.io/s/github/jojoba2010/ChartPancakeswap
 
 ### reduxjs/toolkit
 
+#### pancakeswap.info
+https://api.pancakeswap.info/api/tokens/
+
